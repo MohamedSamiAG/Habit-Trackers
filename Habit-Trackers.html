@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Habit-Trackers.css">
+</head>
+<body>
+
+  
+  <!-- Amina Project -->
+<!-- outer container -->
+<nav class="navbar">
+    <!--inner container-->
+<div class="navbar_inner"> 
+    <!-- LEFT SECTION -->
+    <div class="navbar_left">
+        <div class="title">
+        <i class="far fa-check-square"></i>
+           Habit Tracker
+        </div>
+        <div class="links">
+            <a href="#">Dashbord</a>
+            <a href="#">Reports</a>
+            <a href="#">About</a>
+        </div>
+        </div>
+        <i class="fa-notdog fa-solid fa-gear"></i>
+    <!--Right SECTION -->
+    <div class="navbar_right">
+        <bottom>
+            <i class="fa-solid fa-plus"></i>
+            <span> New Habit </span>
+             </bottom>
+    </div>
+
+    </div>
+</nav>
+
+<div class ="Cards">
+   <div class="mainCard">
+    <div class="firstCard">
+        <div class="text">Today</div>
+        <div class="value">
+            3 / 3
+        <i class="fas fa-calendar-check"></i>
+        </div>
+        <!-- Progress Bar: Visual indicator -->
+        <div class="progMainB">
+        <div class="fillB" style ="width: 60%;"></div>
+        </div>
+        <div class="con"></div>
+    </div>
+    <div class="secondCard">
+        <div class="text">7 Day Streak</div>
+        <div class="value">
+            <span>4 days</span>
+            <i class="fas fa-fire" style="color:rgba(227, 107, 9, 0.912);"></i>
+            
+       </div>
+       <div class="text">Don’t break the chain</div> 
+  </div>
+  
+    <div class="thirdCard">
+         <div class="text">Active habits</div>
+        <div class="value"> 
+                3 
+             <i class="fa-solid fa-list"></i>
+         </div>
+         <div class="text">Track at most 7-10 to stay focused</div>
+        
+    </div>
+
+</div>
+
+</div>
+
+<!-- firas Project  -->
+<div id="Habits_Container">
+    <div id="Todays_Habits_header"><h2>Today's Habits</h2> <button id="clear">Clear</button></div>
+    <div id="AllHabits">
+
+        <div class="OneHabit"><!-- Rounded switch -->
+                <div id="checkPart">
+                    <div class="toggle_button">
+                        <label class="switch" >
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+
+                    </div>
+                     <i class="ri-bowl-line" style="padding-left: 9px;"></i> 
+                    
+                    <h4>Training</h4> 
+
+                </div>
+
+                <div class="RegPart">
+                    <button class="RegButton"><i class="ri-file-list-2-line" ></i></button>  <button class="RegButton"><i class="ri-pencil-line" ></i></button>  <button class="RegButton bin"><i class="ri-delete-bin-6-line" ></i></button>   
+                </div>
+
+        </div>
+
+        <div class="OneHabit"><!-- Rounded switch -->
+                <div id="checkPart">
+                    <div class="toggle_button">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+
+
+                    </div>
+                     <i class="ri-bowl-line" style="padding-left: 9px;"></i> 
+                    
+                    <h4>Reading</h4> 
+
+                </div>
+
+                <div class="RegPart">
+                    <button class="RegButton"><i class="ri-file-list-2-line"></i></button>  <button class="RegButton"><i class="ri-pencil-line" ></i></button>  <button class="RegButton bin"><i class="ri-delete-bin-6-line" ></i></button>   
+                </div>
+
+        </div>
+
+        <div class="OneHabit"><!-- Rounded switch -->
+                <div id="checkPart">
+                    <div class="toggle_button">
+                        <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        </label>
+
+                    </div>
+                     <i class="ri-bowl-line" style="padding-left: 9px;"></i> 
+                    
+                    <h4>Walking for one hour</h4> 
+
+                </div>
+
+                <div class="RegPart">
+                    <button class="RegButton"><i class="ri-file-list-2-line" ></i></button>  <button class="RegButton"><i class="ri-pencil-line" ></i></button>  <button class="RegButton bin"><i class="ri-delete-bin-6-line" ></i></button>   
+                </div>
+
+        </div>
+    </div>
+    
+        
+    
+
+</div>
+
+
+
+
+
+<!-- mohamed Project  -->
+
+<div class="head_table">
+<div class="head2_table">
+    <h3>Weekly Board</h3>
+
+
+<div class="buttonTableHead">
+  <span style="font-size: 15px; color: rgba(240, 248, 255, 0.281);">Span</span>
+  <summary class="summdiv" style="display: flex; justify-content: space-around; align-items: center; cursor: pointer; border: rgba(255, 248, 220, 0.089) solid 1px; font-weight: bold; font-size: 13px; background-color: rgb(53 58 64); display: flex; align-items: center; padding: 8px 20px; margin: 0 7px; border-radius: 6px;">
+  <div>1 Week</div>   <div><i class="ri-arrow-down-s-line" style=""></i></div> 
+  </summary>
+
+<button class="buttonTable"><i class="ri-arrow-left-s-line" style="font-size: 15px; color: rgb(123 126 131);"></i>
+</button>
+
+<div style="font-size: 15px; padding: 0 3px; font-weight: 700; opacity: 0.5; color: rgb(134, 134, 134);">Oct 20 - Oct 26</div>
+
+<button class="buttonTable"><i class="ri-arrow-right-s-line"style="font-size: 15px; color: rgb(123 126 131);"></i></button>
+</div>
+
+</div>
+
+
+
+<table class="mainTable">
+  <tr>
+    <th>Habit</th>
+    <th>Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th>Sun</th>
+  </tr>
+  <tr style="background-color: rgb(45 48 53);">
+    <td style="padding: 0 5px;"><i class="ri-bowl-line" style="padding: 0 5px;"></i>Running</td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+  </tr>
+  <tr>
+    <td style="padding: 0 5px;" ><i class="ri-bowl-line" style="padding: 0 4px;"></i>Running</td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+  </tr>
+  <tr style="background-color: rgb(45 48 53);">
+    <td style="padding: 0 5px;"><i class="ri-bowl-line" style="padding: 0 4px;"></i>Running</td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+  </tr>
+</table>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="Habit-Trackers.js"></script>
+</body>
+</html>
