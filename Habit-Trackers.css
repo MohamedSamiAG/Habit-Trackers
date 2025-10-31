@@ -4,36 +4,46 @@ body{
     color: rgb(204, 210, 212);
    background-color: rgb(34 36 41);
 font-family: 'Roboto';
+padding: 0;
+margin: 0;
 
 
 }
 .containers{
-   display: grid;
-  grid-template-columns: repeat(4, 3fr);
-  grid-template-rows: auto auto;
-  gap: 10px; 
+     display: grid;
+  grid-template-areas:
+    "mainCard mainCard"
+    "Habits_Container gridTable";
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 1fr;
+  gap: 20px;
+  padding: 30px 20px 100px 90px;
+
+ 
+
 }
 
 
 
 /* <!-- Amina Project --> */
 
-.Cards {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #1e1e1e;   
-        }
+.Cards{
+   display: grid;
+   grid-area: mainCard;
+}
         .mainCard{
-            display:flex;
-            gap: 2px;
+            display: flex;
+justify-content: start;
+ width: 94%; 
+ height: 140px;
+ font-size: small;
         }
        
 
 
         .navbar {
              background: #1f2937;
-            padding: 0 20px;
+            padding: 0 60px;
            
         }
 
@@ -41,8 +51,8 @@ font-family: 'Roboto';
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
+           width: 100%;
+            
             padding: 15px 0;
         }
 
@@ -111,17 +121,17 @@ font-family: 'Roboto';
             color: rgb(38, 61, 146);
         }
         .firstCard{
-            background-color: #2b2b2b;
+           background-color: rgb(40 42 47);
             border-radius: 10px;
             padding : 20px;
-           width: 400px;; 
-            margin:10px;
+           width: 100%; 
+            margin:10px 0 0 0;  
             box-shadow: 0 2px 6px rgb(0,0,0,0.3);
         }
         .text{
             display: flex;
             justify-items: flex-start;
-            ont-size: 1.2em;   
+            font-size: 1.2em;   
            font-weight:100px; 
            margin-bottom: 10px;
            color:#504c4c;
@@ -158,24 +168,24 @@ font-family: 'Roboto';
         border-radius: 5px;        
        }
        .secondCard {
-  background-color: #2b2b2b;  
+  background-color: rgb(40 42 47);  
   border-radius: 10px;        
   padding: 20px;              
-   width:400px;   
+    width: 100%;   
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); 
-  margin: 10px;              
+  margin:10px 15px 0 15px;             
   text-align: center;         
 }
 
 .thirdCard {
-  background-color: #2b2b2b;  
+  background-color: rgb(40 42 47);
   border-radius: 10px;         
-  padding: 20px;               
-   width: 400px;;    
+  padding: 20px 20px 30px 20px;               
+    width: 100%;   
   text-align: center;          
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);  
-  margin: 10px;  
- 
+  
+  margin:10px 0 0 0;    
 }
 
 
@@ -191,17 +201,19 @@ font-family: 'Roboto';
 
 
 
-#Habits_Container{
-    display:flex;
-    flex-direction: column;
+.Habits_Container{
+    display: grid;
+    
+    grid-area:Habits_Container;
+    
+     width: 100%; 
     background-color: rgb(34 36 41) ;
     font-family: Arial, Helvetica, sans-serif;
     color: #ffffff;
-    justify-content: center;
-    max-width: 40%;
+    
     border: 1px solid rgba(245, 245, 220, 0.178);
     border-radius: 10px;
-    min-width: 443px;
+    
 
 }
 
@@ -375,12 +387,16 @@ input:checked + .slider:before {
 
 
 /* <!-- mohamed Project  --> */
+.gridTable{
+ display: grid;
+grid-area:gridTable;
+ width: 100%; 
+}
 .head_table{
-display: flex;
-flex-direction: column;
+ 
     font-size: small;
     background-color: rgb(34 36 41);
-width: 650px;
+ width: 90%; 
    border: 1px solid rgba(245, 245, 220, 0.178);
     border-radius: 10px;
 }
@@ -421,7 +437,7 @@ width: 650px;
 
 .mainTable {
   width: 100%;
- padding: 10px 10px 20px 20px;
+ padding: 0px 10px 20px 20px;
     text-align: right;
   border-collapse: separate;
   font-size: 15px;
