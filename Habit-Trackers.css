@@ -189,6 +189,110 @@ justify-content: start;
   
   margin:10px 0 0 0;    
 }
+/*style Css of innerhtml JS
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  background: rgba(30, 29, 29, 0.095); 
+  
+}
+
+/* Popup white frame */
+.popup-box {
+  width: 450px;
+  padding: 20px;
+  border: 0.1px solid rgba(52, 51, 51, 0.5); 
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  color: white; 
+  background: rgba(35, 34, 34); 
+}
+
+/* Inputs */
+.sss {
+  width:90%;
+  padding: 10px;
+  border: 0.5px solid rgba(255, 255, 255, 0.5); 
+  border-radius: 6px;
+  font-size: 14px;
+  background:  rgba(30, 29, 29, 0.095); 
+  color: white;
+}
+
+.sss::placeholder {
+  color: #bbb;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Close icon style */
+.closeX {
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.closeX:hover {
+ transform:none;
+}
+/*style css of  hr*/
+.separator {
+  border: 0;
+  border-top: 1px solid white;
+  margin: 0 0 15px 0;
+}
+
+
+
+
+
+/* Buttons container bottom-right */
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; 
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 0.3px solid rgba(255, 255, 255, 0.5); /* Transparent border */
+  cursor: pointer;
+  font-size: 14px;
+  background: rgba(30, 29, 29, 0.095); ; 
+  color: white;
+  width: 70px; 
+}
+ 
+
+/* Save button */
+#saveBtn {
+  background: green;
+   border: none;
+  color: white;
+}
+
 
 
 
