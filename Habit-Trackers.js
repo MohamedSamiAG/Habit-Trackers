@@ -34,6 +34,42 @@ saveBtn.addEventListener("click", () => {
   const input2 = document.getElementsByClassName("sss")[1];
 
   console.log("Habit saved:", input1.value, input2.value);
+  
+//creat tr
+  const tr = document.createElement("tr");
+  //Add main habit name
+  tr.innerHTML = `<td style="padding: 0 5px;" ><i class="ri-bowl-line" style="padding: 0 4px;"></i>${input1.value}</td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-close-circle-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>
+    <td><i class="ri-verified-badge-line"></i></td>`;
+
+//Add tr in table
+habitTable.appendChild(tr);
+
+//Add todayHabits
+ AllHabits.innerHTML =`<div id="checkPart">
+                    <div class="toggle_button">
+                        <label class="switch" >
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+
+                    </div>
+                     <i class="ri-bowl-line" style="padding-left: 9px;"></i> 
+                    
+                    <h4>${input1.value}</h4> 
+
+                </div>
+
+                <div class="RegPart">
+                    <button class="RegButton"><i class="ri-file-list-2-line" ></i></button>  <button class="RegButton"><i class="ri-pencil-line" ></i></button>  <button class="RegButton bin"><i class="ri-delete-bin-6-line" ></i></button>   
+                </div>
+` ;
+
 
   // inputs
   input1.value = " ";
