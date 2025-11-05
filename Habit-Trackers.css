@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double+Ink:wght@100..900&family=Kufam:ital,wght@0,400..900;1,400..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Metal+Mania&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-body{
+html,body{
     color: rgb(204, 210, 212);
    background-color: rgb(34 36 41);
 
 font-family: 'Roboto';
-
+ height: 100vh;
 padding: 0;
 margin: 0;
 
@@ -19,7 +19,7 @@ margin: 0;
   grid-template-columns: 39% 61%;
   grid-template-rows: 1fr;
   gap: 20px;
-  padding: 30px 20px 100px 90px;
+  padding: 30px 90px 100px 90px;
 
  
 
@@ -36,7 +36,7 @@ margin: 0;
         .mainCard{
             display: flex;
 justify-content: start;
- width: 94%; 
+ width: 100%; 
  height: 140px;
  font-size: small;
         }
@@ -206,19 +206,38 @@ justify-content: start;
 }
 
 /* Popup white frame */
+.popups {
+    width: 100%;
+    height: 100%;
+    background-color: #64676e3d;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
 .popup-box {
-  width: 450px;
+  width: 500px;
+ 
   padding: 20px;
   border: 0.1px solid rgba(52, 51, 51, 0.5); 
   border-radius: 10px;
-
+  position: fixed;
   display: flex;
   flex-direction: column;
   gap: 10px;
 
   color: white; 
-  background: rgba(35, 34, 34); 
+  background: rgb(35, 34, 34); 
+  
+  
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  z-index: 9999; 
 }
+
 
 /* Inputs */
 .sss {
@@ -360,8 +379,8 @@ button {
 #AllHabits{
   display: flex;
   flex-direction: column;
-  padding: 15px 15px 23px 15px;
-  min-width: 390px;
+  padding: 30px 15px 23px 15px;
+  min-width: 400px;
 }
 
 
@@ -382,8 +401,12 @@ button {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
+  height: 50px;
+  margin-bottom: 14px;
+ 
   font-size: 300 px;
+  
 }
 
 .RegButton{
@@ -420,7 +443,10 @@ button {
 
 .RegPart{
   display: flex;
-  flex-direction: row;
+  margin-left: 15%;
+ width: 20px;
+margin-bottom: 15px;
+  
 }
 
 
@@ -487,7 +513,16 @@ input:checked + .slider:before {
 }
 
 
-
+#AllHabits{
+  display: flex;
+  flex-direction: column;
+}
+.asdasd{
+ width: 120px;
+  overflow: hidden;     
+  white-space: nowrap;   
+  text-overflow: ellipsis; 
+}
 
 
 
@@ -497,34 +532,38 @@ input:checked + .slider:before {
 .gridTable{
  display: grid;
 grid-area:gridTable;
- width: 90%; 
+ width: 100%; 
+ border-radius: 20px;
 }
 .head_table{
- 
-    font-size: small;
-    background-color: rgb(34 36 41);
-
-   border: 1px solid rgba(245, 245, 220, 0.178);
-    border-radius: 10px;
+  width: 100%; 
+  
+  font-size: small;
+  background-color: rgb(34 36 41);
+  
+  border: 1px solid rgba(245, 245, 220, 0.178);
+  border-radius: 10px;
 }
 
 .head2_table{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
     display: flex;
-    
+    border-bottom:1px solid rgba(245, 245, 220, 0.137);
     justify-content: space-between;
     align-items: center;
    font-size: large;
     background-color: rgb(40 42 47);
-    height: 50px;
+    height: 69px;
   padding-bottom: 10px;
-  padding: 0 10px 0 15px;
+  padding: 0 20px 0 20px;
     
 }
 .buttonTableHead{
   display: flex;
   align-items: center;
   justify-content: center;
-  right: 9px;
+  
 
   
 }
@@ -543,32 +582,37 @@ grid-area:gridTable;
 
 
 .mainTable {
-  width: 100%;
- padding: 0px 10px 20px 20px;
+  width: 90%;
+ padding: 0px 0px 20px 20px;
     text-align: right;
   border-collapse: separate;
-  font-size: 15px;
+  font-size: 20px;
 border-spacing: 0;
-
+ margin: 10px 0px 10px 15px;
 
    
 }
-.mainTable td{
-   font-size: 20px;
-}
+
 
 .mainTable th, .mainTable td {
 
- padding: 8px 6px;
+ padding: 20px 0px 20px 0px;
+
  border: none;
 }
 .mainTable td:first-child,
 .mainTable th:first-child {
   text-align: left; 
- 
+
 }
+.vbb {
+  
 
-
+  width: 220px;
+  overflow: hidden;     
+  white-space: nowrap;   
+  text-overflow: ellipsis; 
+}
 
 
 
