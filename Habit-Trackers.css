@@ -397,7 +397,7 @@ button {
 }
 
 
-#checkPart{
+.checkPart{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -640,4 +640,17 @@ i:hover {
   filter: brightness(1.1);
 }
 
+#fillB{
+transition: width 1s cubic-bezier(.2, .9, .3, 1);
+background-color: #1e1f27;
+  animation: changeColor 10s infinite alternate;
+
+}
+@keyframes changeColor {
+  0%   { background-color: #1e1f27; }
+  25%  { background-color: #3b1f5a; }
+  50%  { background-color: #005f73; }
+  75%  { background-color: #aa5805; }
+  100% { background-color: #33ff00; }
+}
 /* animtion */

@@ -1,136 +1,121 @@
+let id = 0;
 const Cards = document.getElementById("bottom_habit");
 const nwe = document.getElementById("nwe");
 const AllHabits = document.getElementById("AllHabits");
+const habitTable = document.getElementById("habitTable");
 
-let id = 0;
-//  New Habit bottom_habit
-Cards.addEventListener("click", () => {
-   
+//==========================================Popup==============================================
+function openPopup() {
+  Cards.addEventListener("click", () => {
     nwe.innerHTML = `
-    <div class="popups">
-    <div class="popup">
-    <div class="popup-box">
-    
-    <div class="header">
-    <h2>Add Habit</h2>
-    <i id="closeIcon" class="fa-solid fa-xmark closeX"></i>
-    </div>
-    
-    <hr class="separator">
-    <label for="habit">Name</label>
-    <input type="text" id="habit" placeholder="e.g. Drink Water" class="sss">
+      <div class="popups">
+        <div class="popup">
+          <div class="popup-box">
+            <div class="header">
+              <h2>Add Habit</h2>
+              <i id="closeIcon" class="fa-solid fa-xmark closeX"></i>
+            </div>
+            <hr class="separator">
+            <label for="habit">Name</label>
+            <input type="text" id="habit" placeholder="e.g. Drink Water" class="sss">
+            <label for="mH">Mode</label>
+            <input type="text" id="mH" placeholder="Normal" class="sss">
+            <div class="buttons">
+              <button id="saveBtn">Save</button>
+              <button id="closeBtn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
 
-    <label for="mH">Mode</label>
-    <input type="text" id="mH" placeholder="Normal" class="sss">
-<div class="buttons">
-    <button id="saveBtn">Save</button>
-    <button id="closeBtn">Cancel</button>
-</div>
-  </div>
-  </div>
-  </div>
-  `;
-  
-  
-  
-  //save buttom
-  const saveBtn = document.getElementById("saveBtn");
-  const nooot = document.getElementById("nooot");
-  const input1 = document.getElementsByClassName("sss")[0];
-  const input2 = document.getElementsByClassName("sss")[1];
-  
-  saveBtn.addEventListener("click", () => {
-  
-      id++
-      
-      console.log(`Habit saved:", ${input1.value}${input2.value} ${id}`);
-      
-      //creat tr
-      const tr = document.createElement("tr");
-      // ..............Weekly Board..........
-      tr.id = `habit-${id}`;
-      tr.innerHTML = `<td  style="padding: 0 5px;" ><div class="vbb"><i class="ri-bowl-line" style="padding: 0 4px;"></i>${input1.value}${id}</di></td>
-      <td><i class="ri-close-circle-line"></i></td>
-    <td><i class="ri-verified-badge-line"></i></td>
-    <td><i class="ri-verified-badge-line"></i></td>
-    <td><i class="ri-close-circle-line"></i></td>
-    <td><i class="ri-close-circle-line"></i></td>
-    <td><i class="ri-verified-badge-line"></i></td>
-    <td><i class="ri-verified-badge-line"></i></td>`;
+    // نجيب العناصر بعد ما ظهرت
+    const saveBtn = document.getElementById("saveBtn");
+    const input1 = document.getElementsByClassName("sss")[0];
+    const input2 = document.getElementsByClassName("sss")[1];
+    const closeIcon = document.getElementById("closeIcon");
+    const closeBtn = document.getElementById("closeBtn");
 
-//Add tr in table
+    // زر الإغلاق
+    closeIcon.addEventListener("click", () => (nwe.innerHTML = ""));
+    closeBtn.addEventListener("click", () => (nwe.innerHTML = ""));
 
-
-habitTable.appendChild(tr);
-
-
-//....Add todayHabits.....
-const habitDiv = document.createElement("div");
-habitDiv.id = `habit-${id}`;
-habitDiv.innerHTML = `<div id="checkPart">
-   <div class="toggle_button">
-<label class="switch" >
-<input type="checkbox">
-<span class="slider round"></span>
-                        </label>
-                        
-                    </div>
-                    <i class="ri-bowl-line" style="padding-left: 9px;"></i> 
-                    
-                    <h4 class = "asdasd">${input1.value}${id}</h4> 
-                    <div class="RegPart">
-                    <button class="RegButton"><i class="ri-file-list-2-line" ></i></button>  <button class="RegButton"><i class="ri-pencil-line" ></i></button>  
-                    <button class="RegButton bin"><i class="ri-delete-bin-6-line" id="deleteSingle-${id}"></i>
-</button>   
-                    </div>
-                    </div>
-                    
-                
-                
-`;
-
-AllHabits.appendChild(habitDiv);
-
-                
-const deleteSingle = document.getElementById(`deleteSingle-${id}`);
-deleteSingle.addEventListener("click", function() {
-  habitDiv.remove();
-    tr.remove();  
-});
-                
-                // inputsى
-                input1.value = " ";
-  input2.value = " ";
-});
-
-
-
-//....Add todayHabits.....
-//close icon
-const closeIcon = document.getElementById("closeIcon");
- closeIcon.addEventListener("click", () => {
-   nwe.innerHTML = "";   
+    // 🔥 هنا ننادي دالة الحفظ مرة واحدة بعد ما الـ popup اتفتح
+    saveAll(saveBtn, input1, input2, habitTable, AllHabits);
   });
+}
 
+// === دالة الحفظ ===
+function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
+  saveBtn.addEventListener("click", () => {
+    id++;
+    console.log(`Habit saved: ${input1.value} ${input2.value} ${id}`);
 
+    const tr = document.createElement("tr");
+    tr.id = `habit-${id}`;
+    tr.innerHTML = `
+      <td style="padding: 0 5px;">
+        <div class="vbb">
+          <i class="ri-bowl-line" style="padding: 0 4px;"></i>${input1.value} ${id}
+        </div>
+      </td>
+      <td><i class="ri-close-circle-line"></i></td>
+      <td><i class="ri-verified-badge-line"></i></td>
+      <td><i class="ri-verified-badge-line"></i></td>
+      <td><i class="ri-close-circle-line"></i></td>
+      <td><i class="ri-close-circle-line"></i></td>
+      <td><i class="ri-verified-badge-line"></i></td>
+      <td><i class="ri-verified-badge-line"></i></td>
+    `;
+    habitTable.appendChild(tr);
 
-  // close buttom
-  const closeBtn = document.getElementById("closeBtn");
-  
-  closeBtn.addEventListener("click", () => {
-      nwe.innerHTML = "";   
+    
+    const habitDiv = document.createElement("div");
+    habitDiv.id = `habit-${id}`;
+    habitDiv.innerHTML = `
+        <div class="checkPart">
+        <div class="toggle_button">
+          <label class="switch">
+            <input type="checkbox" id="checkbox${id}">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <i class="ri-bowl-line" style="padding-left: 9px;"></i>
+        <h4 class="asdasd">${input1.value} ${id}</h4>
+        <div class="RegPart">
+          <button class="RegButton"><i class="ri-file-list-2-line"></i></button>
+          <button class="RegButton"><i class="ri-pencil-line"></i></button>
+          <button class="RegButton bin">
+            <i class="ri-delete-bin-6-line" id="deleteSingle-${id}"></i>
+          </button>
+        </div>
+      </div>
+      `;
+      AllHabits.appendChild(habitDiv);
+      updateHabitCount();
+      
+      // زر الحذف الفردي
+      const deleteSingle = document.getElementById(`deleteSingle-${id}`);
+      deleteSingle.addEventListener("click", function () {
+        habitDiv.remove();
+        tr.remove();
+        updateHabitCount();
+        updateProgressBarAndStreak();
+
     });
-});
-//  ....................................New Habit bottom_habit......................................
+    const checkbox = habitDiv.querySelector('input[type="checkbox"]');
+checkbox.addEventListener("change", updateProgressBarAndStreak);
+
+  });
+}
+
+ 
 
 
+openPopup();
 
-
-
-
+// clear all
 const clearTodays_Habits = document.getElementById("clearTodays_Habits");
-
-
 clearTodays_Habits.addEventListener("click",()=>{
     AllHabits.innerHTML =""
     habitTable.innerHTML=`<tr>
@@ -143,4 +128,53 @@ clearTodays_Habits.addEventListener("click",()=>{
     <th>Sat</th>
     <th>Sun</th>
   </tr> `
+  updateHabitCount();
+  updateProgressBarAndStreak();
+
 })
+// clear all
+//==========================================Popup==============================================
+  
+ 
+  
+ 
+
+
+
+//....Add todayHabits.....
+//close icon
+
+//  ....................................New Habit bottom_habit......................................
+
+
+
+
+
+//  =====updateProgressBarAndStreak===== updateHabitCount========
+
+const numberParValue = document.getElementById("numberParValue");
+const numberParStreak = document.getElementById("numberParStreak");
+const fillB = document.getElementById("fillB");
+
+function updateHabitCount() {
+  const count = AllHabits.querySelectorAll(".checkPart").length;
+  numberParValue.innerText = count;
+  
+};
+
+
+function updateProgressBarAndStreak() {
+  const checkboxes = AllHabits.querySelectorAll('.checkPart input[type="checkbox"]');
+  const checked = AllHabits.querySelectorAll('.checkPart input[type="checkbox"]:checked').length;
+  const count = checkboxes.length;
+
+ 
+  const percentage = count > 0 ? (checked / count) * 100 : 0;
+  fillB.style.width = `${percentage}%`;
+
+ 
+  numberParStreak.innerText = checked;
+
+  console.log(`✅ Checked: ${checked} / ${count} | ${percentage}%`);
+}
+//  =====updateProgressBarAndStreak===== updateHabitCount========
