@@ -83,8 +83,8 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
         <i class="ri-bowl-line" style="padding-left: 9px;"></i>
         <h4 class="asdasd">${input1.value} ${id}</h4>
         <div class="RegPart">
-          <button class="RegButton"><i class="ri-file-list-2-line"></i></button>
-          <button class="RegButton"><i class="ri-pencil-line"></i></button>
+          <button class="RegButton"  id="allNote-${id}"><i class="ri-file-list-2-line"></i></button>
+          <button class="RegButton" id="addNote-${id}"><i class="ri-pencil-line"></i></button>
           <button class="RegButton bin">
             <i class="ri-delete-bin-6-line" id="deleteSingle-${id}"></i>
           </button>
@@ -93,7 +93,32 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
       `;
       AllHabits.appendChild(habitDiv);
       updateHabitCount();
-      
+       
+
+       const addValue = document.getElementById(`addNote-${id}`)
+       const addAll = document.getElementById(`allNote-${id}`)
+       const addHome = document.getElementById(`addHome`)
+       
+       addValue.addEventListener("click", function () {
+         
+         const inputx = document.getElementById(`inputx`)
+addHome.innerHTML = `<div>hellloo
+<input  id="inputx" type="text">
+</div>`
+
+       })
+ addAll.addEventListener("click", function () {
+  addAll.innerHTML = `
+  
+  <div class="allAdd">
+    <input ${inputx.value} type="text">
+</div>
+
+  
+  ${inputx.value}`
+ })
+
+  
       // زر الحذف الفردي
       const deleteSingle = document.getElementById(`deleteSingle-${id}`);
       deleteSingle.addEventListener("click", function () {
@@ -101,7 +126,8 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
         tr.remove();
         updateHabitCount();
         updateProgressBarAndStreak();
-
+      
+ 
     });
     const checkbox = habitDiv.querySelector('input[type="checkbox"]');
 checkbox.addEventListener("change", updateProgressBarAndStreak);
@@ -130,7 +156,7 @@ clearTodays_Habits.addEventListener("click",()=>{
   </tr> `
   updateHabitCount();
   updateProgressBarAndStreak();
-
+ addv();
 })
 // clear all
 //==========================================Popup==============================================
@@ -178,3 +204,6 @@ function updateProgressBarAndStreak() {
   console.log(`✅ Checked: ${checked} / ${count} | ${percentage}%`);
 }
 //  =====updateProgressBarAndStreak===== updateHabitCount========
+
+
+
