@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double+Ink:wght@100..900&family=Kufam:ital,wght@0,400..900;1,400..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Metal+Mania&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
-
+bottom_habit
 html,body{
     color: rgb(204, 210, 212);
    background-color: rgb(34 36 41);
@@ -586,24 +586,28 @@ grid-area:gridTable;
  padding: 0px 0px 20px 20px;
     text-align: right;
   border-collapse: separate;
-  font-size: 20px;
+  font-size: 18px;
 border-spacing: 0;
- margin: 10px 0px 10px 15px;
+ margin: 10px 10px 10px 15px;
 
    
 }
 
-
 .mainTable th, .mainTable td {
-
- padding: 20px 0px 20px 0px;
-
- border: none;
+  
+  padding: 20px 20px 20px 10px;
+  
+  border: none;
 }
 .mainTable td:first-child,
 .mainTable th:first-child {
   text-align: left; 
-
+  
+}
+.mainTable td {
+  align-items: center;
+  justify-content: center;
+  padding: 20px 25px 20px 10px;
 }
 .vbb {
   
@@ -668,4 +672,11 @@ height: 200px;
 color: #f6fff6;
   background-color: #141a28;
   height: 40px;
+}
+
+
+
+
+.ayshe{
+  position: absolute;
 }

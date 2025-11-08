@@ -1,3 +1,4 @@
+const today = new Date();
 let id = 0;
 const Cards = document.getElementById("bottom_habit");
 const nwe = document.getElementById("nwe");
@@ -28,14 +29,13 @@ function openPopup() {
         </div>
       </div>
     `;
-
-    // نجيب العناصر بعد ما ظهرت
     const saveBtn = document.getElementById("saveBtn");
     const input1 = document.getElementsByClassName("sss")[0];
     const input2 = document.getElementsByClassName("sss")[1];
     const closeIcon = document.getElementById("closeIcon");
     const closeBtn = document.getElementById("closeBtn");
 
+        // نجيب العناصر بعد ما ظهرت
     // زر الإغلاق
     closeIcon.addEventListener("click", () => (nwe.innerHTML = ""));
     closeBtn.addEventListener("click", () => (nwe.innerHTML = ""));
@@ -56,16 +56,18 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
     tr.innerHTML = `
       <td style="padding: 0 5px;">
         <div class="vbb">
-          <i class="ri-bowl-line" style="padding: 0 4px;"></i>${input1.value} ${id}
+          <i class="ri-bowl-line" style="padding: 0 2px;"></i>${input1.value} ${id}
         </div>
       </td>
-      <td><i class="ri-close-circle-line"></i></td>
-      <td><i class="ri-verified-badge-line"></i></td>
-      <td><i class="ri-verified-badge-line"></i></td>
-      <td><i class="ri-close-circle-line"></i></td>
-      <td><i class="ri-close-circle-line"></i></td>
-      <td><i class="ri-verified-badge-line"></i></td>
-      <td><i class="ri-verified-badge-line"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
+      
+    
     `;
     habitTable.appendChild(tr);
 
@@ -94,53 +96,51 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
       AllHabits.appendChild(habitDiv);
       updateHabitCount();
        
+// ==================================addValues====================================
+const addValue = document.getElementById(`addNote-${id}`)
+const addAll = document.getElementById(`allNote-${id}`)
+const addHome = document.getElementById(`addHome`)
 
-       const addValue = document.getElementById(`addNote-${id}`)
-       const addAll = document.getElementById(`allNote-${id}`)
-       const addHome = document.getElementById(`addHome`)
-       
        addValue.addEventListener("click", function () {
          
          const inputx = document.getElementById(`inputx`)
-addHome.innerHTML = `<div>hellloo
-<input  id="inputx" type="text">
-</div>`
-
-       })
+         addHome.innerHTML = `<div>hellloo
+         <input  id="inputx" type="text">
+         </div>`
+         
+        })
+        const ffff = document.getElementById(`ffff`)
  addAll.addEventListener("click", function () {
-  addAll.innerHTML = `
+  ffff.innerHTML = `
   
   <div class="allAdd">
-    <input ${inputx.value} type="text">
-</div>
-
+    <input value="${inputx.value} " type="text">
+    </div>
+    
+    
+    `
+  })
+  // ====================================addValues=========================
   
-  ${inputx.value}`
- })
-
   
-      // زر الحذف الفردي
+      // ===============================single delete=======================
       const deleteSingle = document.getElementById(`deleteSingle-${id}`);
       deleteSingle.addEventListener("click", function () {
         habitDiv.remove();
         tr.remove();
         updateHabitCount();
         updateProgressBarAndStreak();
+        
+        
+      });
+      // ===============================single delete=======================
+      const checkbox = habitDiv.querySelector('input[type="checkbox"]');
+      checkbox.addEventListener("change", updateProgressBarAndStreak);
       
- 
-    });
-    const checkbox = habitDiv.querySelector('input[type="checkbox"]');
-checkbox.addEventListener("change", updateProgressBarAndStreak);
-
   });
-}
+};openPopup();
 
- 
-
-
-openPopup();
-
-// clear all
+// =============================clear all===========================
 const clearTodays_Habits = document.getElementById("clearTodays_Habits");
 clearTodays_Habits.addEventListener("click",()=>{
     AllHabits.innerHTML =""
@@ -156,9 +156,9 @@ clearTodays_Habits.addEventListener("click",()=>{
   </tr> `
   updateHabitCount();
   updateProgressBarAndStreak();
- addv();
+ 
 })
-// clear all
+// =============================clear all============================
 //==========================================Popup==============================================
   
  
@@ -173,7 +173,9 @@ clearTodays_Habits.addEventListener("click",()=>{
 //  ....................................New Habit bottom_habit......................................
 
 
-
+function actef() {
+  
+}
 
 
 //  =====updateProgressBarAndStreak===== updateHabitCount========
@@ -185,6 +187,8 @@ const fillB = document.getElementById("fillB");
 function updateHabitCount() {
   const count = AllHabits.querySelectorAll(".checkPart").length;
   numberParValue.innerText = count;
+  console.log(count);
+  
   
 };
 
@@ -202,8 +206,54 @@ function updateProgressBarAndStreak() {
   numberParStreak.innerText = checked;
 
   console.log(`✅ Checked: ${checked} / ${count} | ${percentage}%`);
+   DayStreaks(checkboxes, checked, count);
+   checks(checked)
 }
 //  =====updateProgressBarAndStreak===== updateHabitCount========
+function onCheckboxChange() {
+ updateProgressBarAndStreak();
+  DayStreaks(); 
+}
+// =======================Day Streak================
 
+const day = today.getDay();  
+const DayStreak = document.getElementById("DayStreak")
+let streak = 0;
+let lastCheckDate = null;
 
+function DayStreaks(checkboxes, checked, count) {
+ 
 
+  if (!lastCheckDate) {
+    if (checked > 0) {
+      streak = 1;
+      lastCheckDate = today;
+    }
+  } else {
+    const diffTime = today - lastCheckDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+
+      if (checked > 0) streak = streak; 
+    } else if (diffDays === 1) {
+      if (checked > 0) streak++;
+      else streak = 0;
+      lastCheckDate = today;
+    } else {
+     
+      streak = 0;
+      lastCheckDate = null;
+    }
+  }
+
+  DayStreak.innerText = streak;
+}
+
+// =======================Day Streak================
+
+const checkboxes =document.getElementsByClassName("checkboxes-${id}")
+function checks(checked) {
+  console.log(checked);
+  
+}
