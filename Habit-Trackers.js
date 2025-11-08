@@ -95,28 +95,60 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
       updateHabitCount();
        
 
+       
+//addNote and allNotes
        const addValue = document.getElementById(`addNote-${id}`)
        const addAll = document.getElementById(`allNote-${id}`)
        const addHome = document.getElementById(`addHome`)
        
        addValue.addEventListener("click", function () {
-         
-         const inputx = document.getElementById(`inputx`)
-addHome.innerHTML = `<div>hellloo
-<input  id="inputx" type="text">
-</div>`
-
-       })
+      const inputx = document.getElementById(`inputx`);
+addHome.innerHTML = `
+ <div class="popup">
+                <div class="popup-box">
+                    <div class="header">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        <h2>Add note</h2>
+                        <i class="fa-solid fa-xmark closeX" id="closeNoteIcon"></i>
+                    </div>
+                    <hr class="separator">
+                    
+                   <input value= ${inputx.value} type="text">
+                    <div class="buttons">
+                        <button id="closeNoteBtn">Cancel</button>
+                        <button class="btn-save"><i class="fa-solid fa-check"></i> Save</button>
+                        
+                    </div>
+                </div>
+            </div>
+    `;
+      
  addAll.addEventListener("click", function () {
-  addAll.innerHTML = `
-  
-  <div class="allAdd">
-    <input ${inputx.value} type="text">
-</div>
 
+  const poup = document.getElementById("poup");
+ poup.innerHTML = `<div class="popup-box">
+                    <div class="header">
+                
+                 <i class="fa-regular fa-clipboard"></i>
+                    <h2> Notes</h2>
+                    <i class="fa-solid fa-xmark closeX" id="closeNoteIcon"></i>
+                    </div>
+                    <hr class="separator">
+                    
+                   <input value= ${inputx.value} type="text">
+                    <div class="buttons">
+                        <button id="closeNoteBtn">Close</button>
+                     
+                        
+                    </div>
+                </div>
+            </div>`;
+          
+ 
+ });
+});
+       
   
-  ${inputx.value}`
- })
 
   
       // زر الحذف الفردي
@@ -126,6 +158,7 @@ addHome.innerHTML = `<div>hellloo
         tr.remove();
         updateHabitCount();
         updateProgressBarAndStreak();
+        actif();
       
  
     });
@@ -157,6 +190,7 @@ clearTodays_Habits.addEventListener("click",()=>{
   updateHabitCount();
   updateProgressBarAndStreak();
  addv();
+ actif();
 })
 // clear all
 //==========================================Popup==============================================
@@ -206,4 +240,9 @@ function updateProgressBarAndStreak() {
 //  =====updateProgressBarAndStreak===== updateHabitCount========
 
 
-
+const nVp = document.getElementById("nVp");
+function actif() {
+  const count = AllHabits.querySelectorAll(".checkPart").length;
+ nVp.innerText = count;
+  
+}
