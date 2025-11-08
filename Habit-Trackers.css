@@ -261,7 +261,7 @@ justify-content: start;
 }
 
 /* Close icon style */
-.closeX {
+.fa-xmark ,.closeX {
   font-size: 22px;
   color: white;
   cursor: pointer;
@@ -269,7 +269,7 @@ justify-content: start;
   transition: color 0.2s;
 }
 
-.closeX:hover {
+.fa-xmark ,.closeX:hover {
  transform:none;
 }
 /*style css of  hr*/
@@ -306,7 +306,7 @@ button {
  
 
 /* Save button */
-#saveBtn {
+.btn-save,#saveBtn{
   background: green;
    border: none;
   color: white;
