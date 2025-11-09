@@ -97,31 +97,82 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
       updateHabitCount();
        
 // ==================================addValues====================================
-const addValue = document.getElementById(`addNote-${id}`)
-const addAll = document.getElementById(`allNote-${id}`)
-const addHome = document.getElementById(`addHome`)
 
-       addValue.addEventListener("click", function () {
-         
-         const inputx = document.getElementById(`inputx`)
-         addHome.innerHTML = `<div>hellloo
-         <input  id="inputx" type="text">
-         </div>`
-         
-        })
-        const ffff = document.getElementById(`ffff`)
- addAll.addEventListener("click", function () {
-  ffff.innerHTML = `
-  
-  <div class="allAdd">
-    <input value="${inputx.value} " type="text">
-    </div>
-    
-    
-    `
-  })
+
+
   // ====================================addValues=========================
   
+// =======
+       
+//addNote and allNotes
+       const addValue = document.getElementById(`addNote-${id}`)
+       const addAll = document.getElementById(`allNote-${id}`)
+       const addHome = document.getElementById(`addHome`)
+       
+       addValue.addEventListener("click", function () {
+      
+addHome.innerHTML += `
+ <div class="popup">
+   <div class="popup-box">
+      <div class="header">
+        <i class="fa-solid fa-comment-dots"></i>
+        <h2>Add note</h2>
+        <i class="fa-solid fa-xmark closeX" id="closeNoteIcon"></i>
+      </div>
+
+      <hr class="separator">
+      
+      <input id="noteAddInput" type="text">
+
+      <div class="buttons">
+        <button id="closeNoteBtn">Cancel</button>
+        <button class="btn-save"><i class="fa-solid fa-check"></i> Save</button>
+      </div>
+   </div>
+ </div>
+`;
+
+// بعد ما البوب أب اتعمل… نبدأ نجيب العناصر
+const noteAddInput = document.getElementById("noteAddInput");
+
+
+
+
+addAll.addEventListener("click", function () {
+  
+  const inputx = document.getElementById("inputx");
+  const poup = document.getElementById("poup");
+
+  poup.innerHTML += `
+      <div class="popup-box">
+        <div class="header">
+           <i class="fa-regular fa-clipboard"></i>
+           <h2>Notes</h2>
+           <i class="fa-solid fa-xmark closeX" id="closeNoteIcon"></i>
+        </div>
+
+        <hr class="separator">
+
+      <input id="noteShowInput" type="text" value="${noteAddInput.value}">
+<hr>
+        <div class="buttons">
+           <button id="closeNoteBtn">Close</button>
+        </div>
+      </div>
+  `;
+
+  const noteShowInput = document.getElementById("noteShowInput");
+
+  if (inputx) {
+    noteShowInput.value = noteAddInput.value;
+  }
+});
+
+});
+       
+  
+
+
   
       // ===============================single delete=======================
       const deleteSingle = document.getElementById(`deleteSingle-${id}`);
@@ -130,12 +181,16 @@ const addHome = document.getElementById(`addHome`)
         tr.remove();
         updateHabitCount();
         updateProgressBarAndStreak();
-        
+
+         actif();
         
       });
       // ===============================single delete=======================
       const checkbox = habitDiv.querySelector('input[type="checkbox"]');
       checkbox.addEventListener("change", updateProgressBarAndStreak);
+
+        actif();
+
       
   });
 };openPopup();
@@ -156,7 +211,12 @@ clearTodays_Habits.addEventListener("click",()=>{
   </tr> `
   updateHabitCount();
   updateProgressBarAndStreak();
+
+
+ addv();
  
+  actif();
+
 })
 // =============================clear all============================
 //==========================================Popup==============================================
@@ -171,11 +231,6 @@ clearTodays_Habits.addEventListener("click",()=>{
 //close icon
 
 //  ....................................New Habit bottom_habit......................................
-
-
-function actef() {
-  
-}
 
 
 //  =====updateProgressBarAndStreak===== updateHabitCount========
@@ -221,6 +276,7 @@ const DayStreak = document.getElementById("DayStreak")
 let streak = 0;
 let lastCheckDate = null;
 
+
 function DayStreaks(checkboxes, checked, count) {
  
 
@@ -257,3 +313,11 @@ function checks(checked) {
   console.log(checked);
   
 }
+
+const nVp = document.getElementById("nVp");
+function actif() {
+  const count = AllHabits.querySelectorAll(".checkPart").length;
+ nVp.innerText = count;
+  
+}
+
