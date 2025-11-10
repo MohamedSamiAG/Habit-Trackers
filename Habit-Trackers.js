@@ -107,10 +107,10 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
 //addNote and allNotes
        const addValue = document.getElementById(`addNote-${id}`)
        const addAll = document.getElementById(`allNote-${id}`)
-       const addHome = document.getElementById(`addHome`)
+       const addHome = document.getElementById(`addHome-${id}`)
        
        addValue.addEventListener("click", function () {
-      
+      const newNoteId = `noteAddInput-${id}`;
 addHome.innerHTML += `
  <div class="popup">
    <div class="popup-box">
@@ -122,7 +122,7 @@ addHome.innerHTML += `
 
       <hr class="separator">
       
-      <input id="noteAddInput" type="text">
+      <input id="noteAddInput-${id}" type="text">
 
       <div class="buttons">
         <button id="closeNoteBtn">Cancel</button>
@@ -133,7 +133,7 @@ addHome.innerHTML += `
 `;
 
 // بعد ما البوب أب اتعمل… نبدأ نجيب العناصر
-const noteAddInput = document.getElementById("noteAddInput");
+const noteAddInput = document.getElementById(`noteAddInput-${id}`);
 
 
 
@@ -153,7 +153,7 @@ addAll.addEventListener("click", function () {
 
         <hr class="separator">
 
-      <input id="noteShowInput" type="text" value="${noteAddInput.value}">
+      <input id="noteShowInput-${id}" type="text" value="${noteAddInput.value}">
 <hr>
         <div class="buttons">
            <button id="closeNoteBtn">Close</button>
@@ -161,7 +161,7 @@ addAll.addEventListener("click", function () {
       </div>
   `;
 
-  const noteShowInput = document.getElementById("noteShowInput");
+  const noteShowInput = document.getElementById(`noteShowInput-${id}`);
 
   if (inputx) {
     noteShowInput.value = noteAddInput.value;
