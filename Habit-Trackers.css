@@ -312,6 +312,16 @@ button {
   color: white;
 }
 
+input,.notesContent{
+  width: 90%;
+  height: 97%;
+  background: rgb(86, 83, 83);
+  padding: 20px;
+  border-radius: 5px;
+  color: white;
+}
+
+
 
 
 

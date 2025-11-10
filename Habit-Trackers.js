@@ -103,76 +103,87 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
   // ====================================addValues=========================
   
 // =======
-       
-//addNote and allNotes
+     //addNote and allNotes
        const addValue = document.getElementById(`addNote-${id}`)
        const addAll = document.getElementById(`allNote-${id}`)
-       const addHome = document.getElementById(`addHome-${id}`)
-       
-       addValue.addEventListener("click", function () {
-      const newNoteId = `noteAddInput-${id}`;
-addHome.innerHTML += `
- <div class="popup">
-   <div class="popup-box">
-      <div class="header">
-        <i class="fa-solid fa-comment-dots"></i>
-        <h2>Add note</h2>
-        <i class="fa-solid fa-xmark closeX" id="closeNoteIcon"></i>
-      </div>
-
-      <hr class="separator">
-      
-      <input id="noteAddInput-${id}" type="text">
-
-      <div class="buttons">
-        <button id="closeNoteBtn">Cancel</button>
-        <button class="btn-save"><i class="fa-solid fa-check"></i> Save</button>
-      </div>
-   </div>
- </div>
-`;
-
-// بعد ما البوب أب اتعمل… نبدأ نجيب العناصر
-const noteAddInput = document.getElementById(`noteAddInput-${id}`);
 
 
+       const addHome = document.getElementById(`addHome`)
+
+let savedNotes = []; 
 
 
-addAll.addEventListener("click", function () {
-  
-  const inputx = document.getElementById("inputx");
-  const poup = document.getElementById("poup");
-
-  poup.innerHTML += `
+addValue.addEventListener("click", () => {
+  addHome.innerHTML = `
+    <div class="popup">
       <div class="popup-box">
         <div class="header">
-           <i class="fa-regular fa-clipboard"></i>
-           <h2>Notes</h2>
-           <i class="fa-solid fa-xmark closeX" id="closeNoteIcon"></i>
+          <i class="fa-solid fa-comment-dots"></i>
+          <h2>Add note</h2>
+          <i class="fa-solid fa-xmark closeX" id="closeNoteIconAdd"></i>
         </div>
 
         <hr class="separator">
 
-      <input id="noteShowInput-${id}" type="text" value="${noteAddInput.value}">
-<hr>
+        <input id="noteAddInput-${id}" type="text">
+
         <div class="buttons">
-           <button id="closeNoteBtn">Close</button>
+          <button id="closeBtnadd">Cancel</button>
+          <button class="btn-save" id="noteSave"><i class="fa-solid fa-check"></i> Save</button>
         </div>
       </div>
+    </div>
   `;
 
-  const noteShowInput = document.getElementById(`noteShowInput-${id}`);
+  const noteInput = document.getElementById(`noteAddInput-${id}`);
+  const noteSave = document.getElementById("noteSave");
+  const closeBtnadd = document.getElementById("closeBtnadd");
+  const closeIcon = document.getElementById("closeNoteIconAdd");
 
-  if (inputx) {
-    noteShowInput.value = noteAddInput.value;
-  }
+  noteSave.addEventListener("click", () => {
+    const text = noteInput.value.trim();
+    if (text !== "") {
+      savedNotes.push(text);
+      addHome.innerHTML = "";  
+    }
+  });
+
+  closeBtnadd.addEventListener("click", () => addHome.innerHTML = "");
+  closeIcon.addEventListener("click", () => addHome.innerHTML = "");
 });
 
+
+addAll.addEventListener("click", () => {
+
+  poup.innerHTML = `
+    <div class="popup">
+      <div class="popup-box">
+        <div class="header">
+          <i class="fa-regular fa-clipboard"></i>
+          <h2>Notes</h2>
+          <i class="fa-solid fa-xmark closeX" id="closeNoteIconAll"></i>
+        </div>
+
+        <hr class="separator">
+
+        <div class="notesContent">
+          ${
+            savedNotes.length > 0
+              ? savedNotes.map(n => `<p>${n}</p><hr>`).join("")
+              : "<p>No notes yet.</p>"
+          }
+        </div>
+
+        <div class="buttons">
+          <button id="closeNoteBtnall">Close</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("closeNoteBtnall").addEventListener("click", () => poup.innerHTML = "");
+  document.getElementById("closeNoteIconAll").addEventListener("click", () => poup.innerHTML = "");
 });
-       
-  
-
-
   
       // ===============================single delete=======================
       const deleteSingle = document.getElementById(`deleteSingle-${id}`);
@@ -193,7 +204,7 @@ addAll.addEventListener("click", function () {
 
       
   });
-};openPopup();
+ };openPopup();
 
 // =============================clear all===========================
 const clearTodays_Habits = document.getElementById("clearTodays_Habits");
