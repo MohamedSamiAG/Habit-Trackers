@@ -103,11 +103,13 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
   // ====================================addValues=========================
   
 // =======
-       
-//addNote and allNotes
+     //addNote and allNotes
        const addValue = document.getElementById(`addNote-${id}`)
        const addAll = document.getElementById(`allNote-${id}`)
        const addHome = document.getElementById(`addHome`)
+
+// Variable to store the note
+let savedNote = "";
        
        addValue.addEventListener("click", function () {
       
@@ -117,7 +119,7 @@ addHome.innerHTML += `
       <div class="header">
         <i class="fa-solid fa-comment-dots"></i>
         <h2>Add note</h2>
-        <i class="fa-solid fa-xmark closeX" id="closeNoteIcon"></i>
+        <i class="fa-solid fa-xmark closeX" id="closeNoteIconAdd"></i>
       </div>
 
       <hr class="separator">
@@ -125,8 +127,9 @@ addHome.innerHTML += `
       <input id="noteAddInput" type="text">
 
       <div class="buttons">
-        <button id="closeNoteBtn">Cancel</button>
-        <button class="btn-save"><i class="fa-solid fa-check"></i> Save</button>
+  <button id="closeBtnadd">Cancel</button>
+ 
+  <button class="btn-save"id="noteSave"><i class="fa-solid fa-check"></i> Save</button>
       </div>
    </div>
  </div>
@@ -134,8 +137,27 @@ addHome.innerHTML += `
 
 // بعد ما البوب أب اتعمل… نبدأ نجيب العناصر
 const noteAddInput = document.getElementById("noteAddInput");
+  const noteSave = document.getElementById("noteSave");
+  const closeBtnadd = document.getElementById("closeBtnadd");
+  const closeNoteIconAdd = document.getElementById("closeNoteIconAdd");
 
+  // Save note 
+  noteSave.addEventListener("click", () => {
+    if (noteAddInput.value.trim() !== "") {
+      savedNote = noteAddInput.value;
+      addHome.innerHTML = ""; 
 
+    } 
+  });
+
+  // Close button
+ closeBtnadd.addEventListener("click", () =>{
+  addHome.innerHTML=""
+ });
+ //icon close
+ closeNoteIconAdd.addEventListener("click", () =>{
+  addHome.innerHTML=""
+ });
 
 
 addAll.addEventListener("click", function () {
@@ -148,30 +170,35 @@ addAll.addEventListener("click", function () {
         <div class="header">
            <i class="fa-regular fa-clipboard"></i>
            <h2>Notes</h2>
-           <i class="fa-solid fa-xmark closeX" id="closeNoteIcon"></i>
+           <i class="fa-solid fa-xmark closeX" id="closeNoteIconAll"></i>
         </div>
 
         <hr class="separator">
+       <div id="noteShowInput"  class="notesContent" >${savedNote}</div> 
 
-      <input id="noteShowInput" type="text" value="${noteAddInput.value}">
+      
 <hr>
         <div class="buttons">
-           <button id="closeNoteBtn">Close</button>
+           <button id="closeNoteBtnall">Close</button>
         </div>
       </div>
   `;
+const closeNoteBtnall = document.getElementById("closeNoteBtnall");
+const closeNoteIconAll= document.getElementById("closeNoteIconAll");
 
-  const noteShowInput = document.getElementById("noteShowInput");
+  // Close buttons
+closeNoteBtnall.addEventListener("click", () =>{
+ poup.innerHTML="";
+ });
+ //iconclose
+closeNoteIconAll.addEventListener("click", () =>{
+  poup.innerHTML="";
+ });
 
-  if (inputx) {
-    noteShowInput.value = noteAddInput.value;
-  }
+
 });
 
-});
-       
-  
-
+});  
 
   
       // ===============================single delete=======================
