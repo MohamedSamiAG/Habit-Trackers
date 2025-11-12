@@ -1,5 +1,6 @@
 const today = new Date();
 let id = 0;
+let habits = {};
 const Cards = document.getElementById("bottom_habit");
 const nwe = document.getElementById("nwe");
 const AllHabits = document.getElementById("AllHabits");
@@ -50,26 +51,52 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
   saveBtn.addEventListener("click", () => {
     id++;
     console.log(`Habit saved: ${input1.value} ${input2.value} ${id}`);
+    // Initialize habit in habits object
+    
+    habits[id] = {
+      name: input1.value,
+      week: [false, false, false, false, false, false, false],
+     
+    };
 
     const tr = document.createElement("tr");
     tr.id = `habit-${id}`;
     tr.innerHTML = `
       <td style="padding: 0 5px;">
         <div class="vbb">
-          <i class="ri-bowl-line" style="padding: 0 2px;"></i>${input1.value} ${id}
+          <i class="ri-bowl-line" style="padding: 0 2px;"></i>${input1.value}
         </div>
       </td>
-      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
-      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
-      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
-      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
-      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
-      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
-      <td><i class="ri-checkbox-blank-circle-line" class="checkboxes-${id}"></i></td>
-      
-    
+      <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="0"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="1"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="2"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="3"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="4"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="5"></i></td>
+      <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="6"></i></td>
     `;
     habitTable.appendChild(tr);
+
+    // Add event listeners to weekly checkboxes
+    const weekCheckboxes = tr.querySelectorAll('.week-checkbox');
+    weekCheckboxes.forEach(icon => {
+      icon.addEventListener('click', function() {
+        const habitId = parseInt(this.dataset.habit);
+        const dayIndex = parseInt(this.dataset.day);
+        
+        // Toggle the state
+        habits[habitId].week[dayIndex] = !habits[habitId].week[dayIndex];
+        
+        // Update visual
+        if (habits[habitId].week[dayIndex]) {
+          this.classList.remove('ri-checkbox-blank-circle-line');
+          this.classList.add('ri-checkbox-circle-fill');
+        } else {
+          this.classList.remove('ri-checkbox-circle-fill');
+          this.classList.add('ri-checkbox-blank-circle-line');
+        }
+      });
+    });
 
     
     const habitDiv = document.createElement("div");
@@ -77,8 +104,8 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
     habitDiv.innerHTML = `
         <div class="checkPart">
         <div class="toggle_button">
-          <label class="switch">
-            <input type="checkbox" id="checkbox${id}">
+         <label class="switch">
+            <input type="checkbox" class="todayCheck" data-habit="${id}">
             <span class="slider round"></span>
           </label>
         </div>
@@ -94,6 +121,16 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
       </div>
       `;
       AllHabits.appendChild(habitDiv);
+      // Add listener to todaycheckbox
+    const todayCheckbox = habitDiv.querySelector('.todayCheck');
+    todayCheckbox.addEventListener("change", function() {
+      const habitId = parseInt(this.dataset.habit);
+      const isChecked = this.checked;
+      toggleToday(habitId, isChecked); 
+      updateProgressBarAndStreak();
+    });
+
+
       updateHabitCount();
        
 // ==================================addValues====================================
@@ -205,12 +242,38 @@ addAll.addEventListener("click", () => {
       
   });
  };openPopup();
+ //=== Weekly Board Functions ===
+function getTodayIndex() {
+  const day = new Date().getDay();
+  return (day + 6) % 7; // Convert: 0=Mon, 1=Tue, ... 6=Sun
+}
+
+function toggleToday(habitId, checked) {
+  const day = getTodayIndex();
+  habits[habitId].week[day] = checked;
+  updateWeeklyBoard(habitId, day); 
+}
+
+function updateWeeklyBoard(habitId, dayIndex) {
+  const icon = document.querySelector(`[data-habit="${habitId}"][data-day="${dayIndex}"]`);
+  
+  if (icon) {
+    if (habits[habitId].week[dayIndex]) {
+      icon.classList.remove('ri-checkbox-blank-circle-line');
+      icon.classList.add('ri-checkbox-circle-fill');
+    } else {
+      icon.classList.remove('ri-checkbox-circle-fill');
+      icon.classList.add('ri-checkbox-blank-circle-line');
+    }
+  }
+}
+
 
 // =============================clear all===========================
 const clearTodays_Habits = document.getElementById("clearTodays_Habits");
 clearTodays_Habits.addEventListener("click",()=>{
     AllHabits.innerHTML =""
-    habitTable.innerHTML=`<tr>
+    habitTable.innerHTML=` <tr>
     <th>Habit</th>
     <th>Mon</th>
     <th>Tue</th>
@@ -219,7 +282,9 @@ clearTodays_Habits.addEventListener("click",()=>{
     <th>Fri</th>
     <th>Sat</th>
     <th>Sun</th>
-  </tr> `
+  </tr>
+  
+`;
   updateHabitCount();
   updateProgressBarAndStreak();
 
@@ -332,3 +397,6 @@ function actif() {
   
 }
 
+// =======================Checkek Day In weekly board================
+
+  
