@@ -1,9 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double+Ink:wght@100..900&family=Kufam:ital,wght@0,400..900;1,400..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Metal+Mania&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 bottom_habit
-html,body{
-    color: rgb(204, 210, 212);
-   background-color: rgb(34 36 41);
+:root {
+  --primary: #3498db;
+  --secondary: #2ecc71;
+  --danger: #e74c3c;
+  --warning: #f39c12;
+  --dark: #2c3e50;
+  --light: #ecf0f1;
+  --gray: #95a5a6;
+  --text: #333;
+  --border: #ddd;
+  --bg: #f8f9fa;
+  
+  /* Additional custom variables for your design */
+  --navbar-bg: #141a28;
+  --card-bg: #282a2f;
+  --main-bg: #222429;
+  --input-bg: #56535380;
+  --popup-bg: #232222;
+  --text-light: #ccd2d4;
+  --text-secondary: #dbdce2;
+  --border-light: rgba(245, 245, 220, 0.178);
+  --hover-shadow: rgba(83, 96, 131, 0.4);
+}
 
+/* ===== Dark Mode (overrides variables when .dark-mode is active) ===== */
+.dark-mode {
+  --primary: #2980b9;
+  --secondary: #27ae60;
+  --danger: #c0392b;
+  --warning: #e67e22;
+  --dark: #1a252f;
+  --light: #2c3e50;
+  --gray: #7f8c8d;
+  --text: #ecf0f1;
+  --border: #34495e;
+  --bg: #1a1d23;
+  
+  /* Dark mode custom variables */
+  --navbar-bg: #0d1117;
+  --card-bg: #21242a;
+  --main-bg: #161820;
+  --input-bg: #2d2f36;
+  --popup-bg: #1c1e24;
+  --text-light: #e8eaed;
+  --text-secondary: #c9d1d9;
+  --border-light: rgba(255, 255, 255, 0.1);
+  --hover-shadow: rgba(100, 130, 180, 0.5);
+}
+
+html, body {
+    color: var(--text);
+    background-color: var(--bg);
 font-family: 'Roboto';
  height: 100vh;
 padding: 0;
@@ -43,12 +91,15 @@ justify-content: start;
        
 
 
-        .navbar {
-             background: #141a28;
-            padding: 0 60px;
-           
-        }
+       .navbar {
+    background: var(--navbar-bg);
+    padding: 0 60px;
+}
 
+.firstCard, .secondCard, .thirdCard {
+    background-color: var(--card-bg);
+    transition: background-color 0.3s ease;
+}
         .navbar_inner {
             display: flex;
             justify-content: space-between;
@@ -66,33 +117,35 @@ justify-content: start;
         }
 
         .title {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
+    color: var(--text);
+    font-size: 24px;
+    font-weight: bold;
+}
         
         .links {
             display: flex;
             gap: 25px;
         }
+links a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: 300px;
+    opacity: 0.8;
+}
 
-        .links a {
-            color:rgb(196, 179, 179);
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-            font-weight: 300px;
-        }
 
         .links a:hover {
-           color: white;
-        }
+    opacity: 1;
+}
+
 
         /* Right Section */
         .navbar_right  {
-            background-color: #4CAF50;
-            color: white;
+            background-color: var(--navbar-bg);
+            color: var(--text);
             border: none;
             padding: 12px 24px;
             border-radius: 6px;
@@ -103,7 +156,7 @@ justify-content: start;
         }
 
         .navbar_right button:hover {
-            background-color: #45a049;
+            background-color: var(--navbar-bg);
             transform: translateY(-2px);
         }
 
@@ -111,19 +164,19 @@ justify-content: start;
             transform: translateY(0);
         }
         .fa-gear{
-            color : white;
+            color: var(--text);
             border:2px ;
-            background: #2d2c2c9d;
+            background: var(--bg);
             padding: 6px;
         }
         .fa-plus{
-            color:white;
+           color: var(--text);
         }
         .fa-list{
             color: rgb(38, 61, 146);
         }
         .firstCard{
-           background-color: rgb(40 42 47);
+          
             border-radius: 10px;
             padding : 20px;
            width: 100%; 
@@ -142,12 +195,12 @@ justify-content: start;
             display: flex;
             justify-content: space-between;
          font-size: 32px;   
-         color: #f6fff6;    
+         color: var(--text);   
          font-weight: bold;  
          margin-bottom: 15px;
         }
         .fa-check-circle {
-                color: #4caf50;
+                 color: var(--text);
                font-size: 20px;
               transition: transform 0.2s ease;
 }
@@ -159,7 +212,7 @@ justify-content: start;
         .progMainB {
             width: 100%;                
             height: 10px;               
-            background-color: #555;     
+            background-color: var(--bg);     
             border-radius: 5px;         
             overflow: hidden;           
        }  
@@ -169,8 +222,7 @@ justify-content: start;
         width: 60%;                 
         border-radius: 5px;        
        }
-       .secondCard {
-  background-color: rgb(40 42 47);  
+       .secondCard { 
   border-radius: 10px;        
   padding: 20px;              
     width: 100%;   
@@ -180,7 +232,7 @@ justify-content: start;
 }
 
 .thirdCard {
-  background-color: rgb(40 42 47);
+ 
   border-radius: 10px;         
   padding: 20px 20px 30px 20px;               
     width: 100%;   
@@ -227,8 +279,8 @@ justify-content: start;
   flex-direction: column;
   gap: 10px;
 
-  color: white; 
-  background: rgb(35, 34, 34); 
+  color: var(--text);
+  background:var(--bg); 
   
   
   top: 40%;
@@ -246,12 +298,12 @@ justify-content: start;
   border: 0.5px solid rgba(255, 255, 255, 0.5); 
   border-radius: 6px;
   font-size: 14px;
-  background:  rgba(30, 29, 29, 0.095); 
-  color: white;
+  background: var(--bg); 
+   color: var(--text);
 }
 
 .sss::placeholder {
-  color: #bbb;
+   color: var(--text);
 }
 
 .header {
@@ -263,7 +315,7 @@ justify-content: start;
 /* Close icon style */
 .fa-xmark ,.closeX {
   font-size: 22px;
-  color: white;
+   color: var(--text);
   cursor: pointer;
   user-select: none;
   transition: color 0.2s;
@@ -275,7 +327,7 @@ justify-content: start;
 /*style css of  hr*/
 .separator {
   border: 0;
-  border-top: 1px solid white;
+  border-top: 1px solid var(--border);
   margin: 0 0 15px 0;
 }
 
@@ -299,7 +351,7 @@ button {
   border: 0.3px solid rgba(255, 255, 255, 0.5); /* Transparent border */
   cursor: pointer;
   font-size: 14px;
-  background: rgba(30, 29, 29, 0.095); ; 
+  background:var(--bg); ; 
   color: white;
   width: 70px; 
 }
@@ -309,16 +361,16 @@ button {
 .btn-save,#saveBtn{
   background: green;
    border: none;
-  color: white;
+  color:var(--text);
 }
 
 input,.notesContent{
   width: 90%;
   height: 97%;
-  background: rgb(86, 83, 83);
+  background:var(--input-bg);
   padding: 20px;
   border-radius: 5px;
-  color: white;
+  color: var(--text);
 }
 
 
@@ -343,11 +395,11 @@ input,.notesContent{
      width: 100%; }
 .Habits_Container{
   
-    background-color: rgb(34 36 41) ;
+    background-color:var(--bg);
     font-family: Arial, Helvetica, sans-serif;
-    color: #ffffff;
+    color:var(--text);
     width: 100%;
-    border: 1px solid rgba(245, 245, 220, 0.178);
+    border: 1px solid var(--text);
     border-radius: 10px;
     
 
@@ -360,11 +412,11 @@ input,.notesContent{
     justify-content: space-between;
     padding-left: 26px;
     padding-right: 26px;
-    background-color: #292a2f;
-    border-bottom: 1px solid rgba(245, 245, 220, 0.178);
+    background-color:var(--bg);
+    border-bottom: 1px solid var(--border);
     
     border-radius: 10px 10px 0 0;
-    color: #dbdce2;
+    color:var(--text);
 }
 
 
@@ -374,12 +426,12 @@ input,.notesContent{
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: #ccc transparent ;
+  border: var(--border) transparent ;
   border-radius: 10px;
   margin: 5px;
-  background-color: #292c33;
+  background-color:var(--bg);
   min-width: 350px;
-  color: #dbdce2;
+  color:var(--text);
   font-size: 20px;
 }
 .OneHabit h4{
@@ -395,10 +447,10 @@ input,.notesContent{
 
 
 #clear{
-     border: 1px solid rgba(255, 255, 255, 0.603);
+     border: 1px solid var(--border);
      size: 300px ;
-     color:rgba(255, 255, 255, 0.603) ;
-     background-color: #292a2f;
+     color:var(--text) ;
+     background-color: var(--bg);
      justify-content: center ;
      font-size: 20px;
      padding: 8px 11px;
@@ -421,32 +473,32 @@ input,.notesContent{
 
 .RegButton{
   font-size: 20px;
-  background: transparent;
+  background: var(--bg);
   cursor: pointer;
   opacity: 0.8;
-  color: #64676e;
-  border: 1.4px #64676e solid;
+  color: var(--text);
+  border: 1.4px var(--border) solid;
   border-radius: 2px;
   padding: 8px 9px ;
   border-radius: 7px;
   margin: 9px 9px 9px 0 ;
 }
 .RegButton:not(.bin):hover{
-  color: white;
-  background-color: #64676e ;
+  color:var(--text);
+  background-color:var(--bg) ;
   opacity: 0.9;
 
 }
 
 
 .bin{
-  color:#d0053b;
-  border: #a0304e solid;
+  color:var(--text);
+  border: var(--border);
   opacity: 0.6;
 }
 .bin:hover{
-  color: white;
-  background-color: rgba(159, 26, 62, 0.9) ;
+  color:var(--bg);
+  background-color: var(--bg) ;
   opacity: 0.95;
 }
 
@@ -485,8 +537,8 @@ margin-bottom: 15px;
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background-color: #1e1f27;
-  border: 1.4px solid rgba(245, 245, 220, 0.178);
+  background-color: var(--bg);
+  border: 1.4px solid var(--border);
   border-radius: 26px;
   transition: 0.3s;
 }
@@ -509,12 +561,12 @@ margin-bottom: 15px;
 
 input:checked + .slider {
   background-color: #1775ff;
-  border-color: #1775ff;
+  border-color: var(--border);
 }
 
 input:checked + .slider:before {
   transform: translate(23px, -50%);
-  background-color: #ffffff;
+  background-color: var(--bg);
 }
 
 
@@ -549,9 +601,9 @@ grid-area:gridTable;
   width: 100%; 
   
   font-size: small;
-  background-color: rgb(34 36 41);
+  background-color: var(--bg);
   
-  border: 1px solid rgba(245, 245, 220, 0.178);
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
@@ -559,11 +611,11 @@ grid-area:gridTable;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
     display: flex;
-    border-bottom:1px solid rgba(245, 245, 220, 0.137);
+    border-bottom:1px solid var(--border);
     justify-content: space-between;
     align-items: center;
    font-size: large;
-    background-color: rgb(40 42 47);
+    background-color:var(--bg);
     height: 69px;
   padding-bottom: 10px;
   padding: 0 20px 0 20px;
@@ -585,9 +637,9 @@ grid-area:gridTable;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(34 36 41); 
+  background-color: var(--bg); 
  border-radius: 5px;
- border: 1px solid rgba(179, 179, 179, 0.664);
+ border: 1px solid var(--border);
 }
 
 
@@ -656,7 +708,7 @@ i:hover {
 
 #fillB{
 transition: width 1s cubic-bezier(.2, .9, .3, 1);
-background-color: #1e1f27;
+background-color:var(--bg);
   animation: changeColor 10s infinite alternate;
 
 }
@@ -673,7 +725,7 @@ background-color: #1e1f27;
 .allAdd{
 width: 50%;
 height: 200px;
-  background-color: #005f73;
+  background-color: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,6 +1,23 @@
 const today = new Date();
-let id = 0;
 let habits = {};
+let habitArray = [];
+let id = 0;
+//LOad from localstorage
+const savedHabits = localStorage.getItem("habits");
+const savedArray = localStorage.getItem("habitsArray");
+const savedId =localStorage.getItem("lastId");
+
+if (savedHabits) {
+  habits = JSON.parse(savedHabits);
+}
+if ( savedArray) {
+  habitArray= JSON.parse(savedArray);
+}
+if (savedId) {
+  id = Number(savedId);
+}
+
+
 const Cards = document.getElementById("bottom_habit");
 const nwe = document.getElementById("nwe");
 const AllHabits = document.getElementById("AllHabits");
@@ -49,16 +66,53 @@ function openPopup() {
 // === دالة الحفظ ===
 function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
   saveBtn.addEventListener("click", () => {
-    id++;
-    console.log(`Habit saved: ${input1.value} ${input2.value} ${id}`);
-    // Initialize habit in habits object
+     const habitName = document.getElementById("habit").value.trim();
+    if (!habitName) return;
     
+    id++;
+    
+    // Create habit
     habits[id] = {
-      name: input1.value,
+      id: id,
+      name: habitName,
       week: [false, false, false, false, false, false, false],
-     
     };
-
+     habitArray.push(habits);
+    // Save
+    localStorage.setItem("habits", JSON.stringify(habits));
+    localStorage.setItem(" habitArray", JSON.stringify( habitArray));
+    localStorage.setItem("lastId", id.toString());
+    
+     // Add to today's list
+    const habitDiv = document.createElement('div');
+    habitDiv.id = `habit-${id}`;
+    habitDiv.innerHTML = `
+      <div class="checkPart">
+        <div class="toggle_button">
+          <label class="switch">
+            <input type="checkbox" class="todayCheck" data-habit="${id}">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <i class="ri-bowl-line" style="padding-left: 9px;"></i>
+        <h4 class="asdasd">${habitName}</h4>
+        <div class="RegPart">
+          <button class="RegButton allNote-btn" id="allNote-${id}" data-id="${id}">
+            <i class="ri-file-list-2-line"></i>
+          </button>
+          <button class="RegButton addNote-btn" id= "addNote-${id}" data-id="${id}">
+            <i class="ri-pencil-line"></i>
+          </button>
+          <button class="RegButton bin delete-btn" data-id="${id}" id ="deleteSingle-${id}">
+            <i class="ri-delete-bin-6-line"></i>
+          </button>
+        </div>
+      </div>
+    `;
+    AllHabits.appendChild(habitDiv);
+    
+    
+  // Add to weekly table
     const tr = document.createElement("tr");
     tr.id = `habit-${id}`;
     tr.innerHTML = `
@@ -75,6 +129,7 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
       <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="5"></i></td>
       <td><i class="ri-checkbox-blank-circle-line week-checkbox" data-habit="${id}" data-day="6"></i></td>
     `;
+    
     habitTable.appendChild(tr);
 
     // Add event listeners to weekly checkboxes
@@ -96,37 +151,19 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
           this.classList.add('ri-checkbox-blank-circle-line');
         }
       });
+       localStorage.setItem("habits", JSON.stringify(habits));
     });
-
-    
-    const habitDiv = document.createElement("div");
-    habitDiv.id = `habit-${id}`;
-    habitDiv.innerHTML = `
-        <div class="checkPart">
-        <div class="toggle_button">
-         <label class="switch">
-            <input type="checkbox" class="todayCheck" data-habit="${id}">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <i class="ri-bowl-line" style="padding-left: 9px;"></i>
-        <h4 class="asdasd">${input1.value} ${id}</h4>
-        <div class="RegPart">
-          <button class="RegButton"  id="allNote-${id}"><i class="ri-file-list-2-line"></i></button>
-          <button class="RegButton" id="addNote-${id}"><i class="ri-pencil-line"></i></button>
-          <button class="RegButton bin">
-            <i class="ri-delete-bin-6-line" id="deleteSingle-${id}"></i>
-          </button>
-        </div>
-      </div>
-      `;
-      AllHabits.appendChild(habitDiv);
+    ;
       // Add listener to todaycheckbox
     const todayCheckbox = habitDiv.querySelector('.todayCheck');
     todayCheckbox.addEventListener("change", function() {
       const habitId = parseInt(this.dataset.habit);
       const isChecked = this.checked;
       toggleToday(habitId, isChecked); 
+      // Save
+    localStorage.setItem("habits", JSON.stringify(habits));
+    localStorage.setItem(" habitArray", JSON.stringify( habitArray));
+    localStorage.setItem("lastId", id.toString());
       updateProgressBarAndStreak();
     });
 
@@ -142,13 +179,13 @@ function saveAll(saveBtn, input1, input2, habitTable, AllHabits) {
 // =======
      //addNote and allNotes
        const addValue = document.getElementById(`addNote-${id}`)
-       const addAll = document.getElementById(`allNote-${id}`)
-
-
        const addHome = document.getElementById(`addHome`)
 
-let savedNotes = []; 
-
+ const habitId = parseInt(addValue.dataset.id);
+    
+    if (!habits[habitId].notes) {
+      habits[habitId].notes = [];
+    }
 
 addValue.addEventListener("click", () => {
   addHome.innerHTML = `
@@ -180,7 +217,8 @@ addValue.addEventListener("click", () => {
   noteSave.addEventListener("click", () => {
     const text = noteInput.value.trim();
     if (text !== "") {
-      savedNotes.push(text);
+      habits[habitId].notes.push({ text: text, date: new Date().toISOString() });
+        localStorage.setItem("habits", JSON.stringify(habits));
       addHome.innerHTML = "";  
     }
   });
@@ -189,9 +227,11 @@ addValue.addEventListener("click", () => {
   closeIcon.addEventListener("click", () => addHome.innerHTML = "");
 });
 
-
+  const addAll = document.getElementById(`allNote-${id}`);
+  const poup = document.getElementById(`poup`);
 addAll.addEventListener("click", () => {
-
+  const habitId = parseInt(addAll.dataset.id);
+    const notesList = habits[habitId].notes || [];
   poup.innerHTML = `
     <div class="popup">
       <div class="popup-box">
@@ -204,11 +244,7 @@ addAll.addEventListener("click", () => {
         <hr class="separator">
 
         <div class="notesContent">
-          ${
-            savedNotes.length > 0
-              ? savedNotes.map(n => `<p>${n}</p><hr>`).join("")
-              : "<p>No notes yet.</p>"
-          }
+          ${notesList.length > 0 ? notesList.map(n => `<p>${n.text}</p><hr>`).join("") : "<p>No notes yet.</p>"}
         </div>
 
         <div class="buttons">
@@ -218,6 +254,7 @@ addAll.addEventListener("click", () => {
     </div>
   `;
 
+
   document.getElementById("closeNoteBtnall").addEventListener("click", () => poup.innerHTML = "");
   document.getElementById("closeNoteIconAll").addEventListener("click", () => poup.innerHTML = "");
 });
@@ -225,12 +262,21 @@ addAll.addEventListener("click", () => {
       // ===============================single delete=======================
       const deleteSingle = document.getElementById(`deleteSingle-${id}`);
       deleteSingle.addEventListener("click", function () {
-        habitDiv.remove();
+ const habitId = parseInt(deleteSingle.dataset.id);
+        //remove from object
+         delete habits[habitId];
+         //remove frop arrray
+          habitArray = habitArray.filter(id => id !== habitId);
+          //remove from DOM
+         habitDiv.remove();
         tr.remove();
         updateHabitCount();
         updateProgressBarAndStreak();
 
          actif();
+       //save
+    localStorage.setItem("habits", JSON.stringify(habits));
+    localStorage.setItem("habitArray", JSON.stringify(habitArray));
         
       });
       // ===============================single delete=======================
@@ -272,7 +318,13 @@ function updateWeeklyBoard(habitId, dayIndex) {
 // =============================clear all===========================
 const clearTodays_Habits = document.getElementById("clearTodays_Habits");
 clearTodays_Habits.addEventListener("click",()=>{
-    AllHabits.innerHTML =""
+   habits = {};
+  habitArray = [];
+  id = 0;
+  localStorage.setItem("habits", JSON.stringify(habits));
+  localStorage.setItem("habitArray", JSON.stringify(habitArray));
+  localStorage.setItem("lastId", "0");
+    AllHabits.innerHTML ="";
     habitTable.innerHTML=` <tr>
     <th>Habit</th>
     <th>Mon</th>
@@ -285,24 +337,14 @@ clearTodays_Habits.addEventListener("click",()=>{
   </tr>
   
 `;
-  updateHabitCount();
-  updateProgressBarAndStreak();
 
+ numberParValue.innerText = 0;
+  numberParStreak.innerText = 0;
+  fillB.style.width = "0%";
+  nVp.innerText = 0;
 
- addv();
- 
-  actif();
-
-})
+});
 // =============================clear all============================
-//==========================================Popup==============================================
-  
- 
-  
- 
-
-
-
 //....Add todayHabits.....
 //close icon
 
@@ -397,6 +439,26 @@ function actif() {
   
 }
 
-// =======================Checkek Day In weekly board================
+// ======================= ToggleDark mode /Light mode================
 
   
+  document.addEventListener("DOMContentLoaded", function () {
+  const icon = document.getElementById("iconthem");
+
+  //  saved theme
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  // Toggle theme when icon clicked
+  icon.addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+
+    // Save current theme
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
